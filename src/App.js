@@ -18,6 +18,7 @@ const App = () => {
   ];
 
   const [token, setToken] = useState('');
+  const [artist, setArtist] = useState('Frank%20Ocean')
 
   useEffect(() => {
 
@@ -32,12 +33,22 @@ const App = () => {
     .then(tokenResponse => {
       console.log(tokenResponse.data.access_token);      
       setToken(tokenResponse.data.access_token);
+      
+
+      axios('https://api.spotify.com/v1/search?q=Frank%20Ocean&type=artist', {
+        method: 'GET',
+        headers: { 'Authorization' : 'Bearer ' + tokenResponse.data.access_token}
+      })
+      .then (apiResponse => {        
+        console.log(apiResponse.data)
+        console.log(apiResponse.data.artists.items[0].name)
+        })
     });
   }, []);
 
   return(
     <React.Fragment>
-      <Search />
+      <Search artistState={artist}/>
       <List listItems={data}/>
       <Dropdown options={data}/>
     </React.Fragment>
