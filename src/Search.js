@@ -8,7 +8,6 @@ const Search = () => {
 }
   return(
     <React.Fragment>
-
       <form onSubmit={handleSearch}>
         <input
           type='text'

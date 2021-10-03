@@ -1,6 +1,7 @@
 import React from "react";
 import Search from "./Search";
-import List from "./List"
+import List from "./List";
+import Dropdown from "./Dropdown";
 
 const App = () => {
 
@@ -10,6 +11,7 @@ const App = () => {
     <React.Fragment>
       <Search />
       <List />
+      <Dropdown />
     </React.Fragment>
       
   )
