@@ -18,7 +18,8 @@ const App = () => {
   ];
 
   const [token, setToken] = useState('');
-  const [artist, setArtist] = useState('Frank%20Ocean')
+  // const [artist, setArtist] = useState('Frank%20Ocean')
+  const [artist, setArtist] = useState('')
 
   useEffect(() => {
 
@@ -39,16 +40,25 @@ const App = () => {
         method: 'GET',
         headers: { 'Authorization' : 'Bearer ' + tokenResponse.data.access_token}
       })
-      .then (apiResponse => {        
-        console.log(apiResponse.data)
-        console.log(apiResponse.data.artists.items[0].name)
+      .then (artistResponse => {
+        setArtist(artistResponse.data.artists.items[0].id);      
+        console.log(artistResponse.data)
+        console.log(artistResponse.data.artists.items[0].name)
+        console.log(artistResponse.data.artists.items[0].id)
         })
+        console.log("artist id in app useState " + artist)
     });
   }, []);
 
+  // const artistChanged = val => {
+  //   setArtist({
+  //     selectedGenre: val, 
+  //     listOfGenresFromAPI: genres.listOfGenresFromAPI
+  //   });
+
   return(
     <React.Fragment>
-      <Search artistState={artist}/>
+      {/* <Search artistState={artist}/> */}
       <List listItems={data}/>
       <Dropdown options={data}/>
     </React.Fragment>
